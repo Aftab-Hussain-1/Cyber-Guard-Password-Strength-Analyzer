@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vault Gauge — Password Strength Checker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Project 1 // Defensive Logic</div>
+    <h1>Vault <span>Gauge</span></h1>
+    <p class="sub">Type a password below. Every check runs live in your browser — nothing is sent anywhere. The gauge reads length, character variety, and known-breach exposure, then estimates how long a brute-force attempt would take.</p>
+  </header>
+
+  <div class="stage">
+    <div class="panel">
+      <span class="panel-label">01 — Input</span>
+      <label class="field-label" for="pw">Password to evaluate</label>
+      <div class="input-row">
+        <input type="password" id="pw" placeholder="Start typing…" autocomplete="off" spellcheck="false">
+        <button class="toggle-btn" id="toggleBtn" type="button" aria-label="Show password">Show</button>
+      </div>
+
+      <div class="gauge-wrap">
+        <div class="gauge-track"><div class="gauge-fill" id="gaugeFill"></div></div>
+        <div class="gauge-meta">
+          <div class="verdict" id="verdict" style="color:var(--ink-dim)">Awaiting input</div>
+          <div class="crack-time" id="crackTime"></div>
+        </div>
+      </div>
+
+      <div class="checks" id="checks">
+        <div class="check-row" data-key="len"><span class="check-icon"></span> 8+ characters</div>
+        <div class="check-row" data-key="upper"><span class="check-icon"></span> Uppercase letter (A–Z)</div>
+        <div class="check-row" data-key="lower"><span class="check-icon"></span> Lowercase letter (a–z)</div>
+        <div class="check-row" data-key="digit"><span class="check-icon"></span> Number (0–9)</div>
+        <div class="check-row" data-key="symbol"><span class="check-icon"></span> Symbol (!@#$…)</div>
+        <div class="check-row" data-key="leak"><span class="check-icon"></span> Not in known-breach list</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <span class="panel-label">02 — Readout</span>
+
+      <div class="stat-block">
+        <div class="stat-num" id="entropyNum">0<span style="font-size:16px;color:var(--ink-dim)"> bits</span></div>
+        <div class="stat-cap">Estimated entropy — log₂ of (character-set size)^(length). Higher means more brute-force guesses required.</div>
+        <div class="keyspace-viz" id="keyspaceViz"></div>
+      </div>
+
+      <div id="leakBanner" class="leak-banner safe">
+        <span>◆</span>
+        <span id="leakText">No breach list checked yet — start typing to test against common leaked passwords.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel full-panel">
+    <span class="panel-label">03 — Passphrase Fabricator</span>
+
+    <div class="slider-row">
+      <label class="field-label" for="lenSlider" style="margin:0;">Length</label>
+      <span class="val" id="lenVal">16</span>
+    </div>
+    <input type="range" id="lenSlider" min="6" max="32" value="16">
+
+    <div class="opt-grid">
+      <label class="opt-pill"><input type="checkbox" id="optUpper" checked> Uppercase</label>
+      <label class="opt-pill"><input type="checkbox" id="optLower" checked> lowercase</label>
+      <label class="opt-pill"><input type="checkbox" id="optDigit" checked> 0-9</label>
+      <label class="opt-pill"><input type="checkbox" id="optSymbol" checked> !@#$</label>
+    </div>
+
+    <div class="gen-output-row">
+      <div class="gen-output" id="genOutput">— generate to preview —</div>
+      <div class="gen-actions">
+        <button class="btn-primary" id="genBtn" type="button">Generate</button>
+        <button class="btn-ghost" id="genCopyBtn" type="button">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel full-panel">
+    <span class="panel-label">04 — Field Reference</span>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <span class="ref-icon">Σ</span>
+        <div class="ref-title">Entropy, bit by bit</div>
+        <div class="ref-body">Estimated as length × log₂(character-set size). A longer alphabet and more characters both push this number up — and every added bit doubles the guesses an attacker needs.</div>
+      </div>
+      <div class="ref-card">
+        <span class="ref-icon">⏱</span>
+        <div class="ref-title">Two attacker models</div>
+        <div class="ref-body">The offline model assumes a stolen hash and ten billion guesses a second on dedicated hardware. The throttled model assumes a rate-limited login form at roughly one hundred guesses a second — the gap between the two is the whole argument for rate limiting.</div>
+      </div>
+      <div class="ref-card">
+        <span class="ref-icon">⚠</span>
+        <div class="ref-title">Beyond raw length</div>
+        <div class="ref-body">A long password can still fail instantly. This checker screens against a short list of common leaked strings and obvious keyboard runs, since those are cracked first regardless of character count.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>Built for <b>DecodeLabs</b> — Project 1: Password Strength Checker. All evaluation runs client-side; no password ever leaves this page.</footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
