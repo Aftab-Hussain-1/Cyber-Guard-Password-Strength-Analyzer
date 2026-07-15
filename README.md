@@ -21,6 +21,10 @@ Implement a real-time password strength analyzer using:
 
 ---
 
+🌐 Live Demo
+Visit the live website here: https://strength-checker-password.netlify.app/
+---
+
 ## 🚀 Features
 
 | Feature | Description |
@@ -172,6 +176,15 @@ Entropy (bits) = length × log₂(character pool size)
 - SVG animation
 - Responsive web design
 - UI/UX design principles
+
+---
+## 📞 Contact
+
+| | |
+|:---|:---|
+| 🌐 Website | [www.decodelabs.tech](https://www.decodelabs.tech) |
+| 📞 Phone | +91 89330 06408 |
+| 📍 Location | Greater Lucknow, India |
 
 ---
 
