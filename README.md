@@ -15,6 +15,10 @@ Iske sath ek **Passphrase Fabricator** bhi hai jo crypto-secure random strong pa
 
 ---
 
+## 🌐 Live Demo
+Visit the live website here: https://vault-gauge-password-strength-checker.netlify.app/
+
+---
 ## 📁 Project Structure
 
 ```
