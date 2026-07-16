@@ -80,6 +80,10 @@ python cyber_password_checker.py
 
 ---
 
+## Output
+<img width="785" height="901" alt="image" src="https://github.com/user-attachments/assets/5bfae243-5ea4-4e33-85ef-4f0063afc2fc" />
+
+
 ## ⚠️ Disclaimer
 
 This tool is for **educational purposes** as part of a cyber security internship project. It does not transmit, store, or log any password you enter — all analysis happens locally in memory and is discarded when the app closes.
